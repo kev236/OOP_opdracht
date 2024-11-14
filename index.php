@@ -10,34 +10,31 @@
     <div class="container">
         <h1>Kies een Apparaat om te Bedienen</h1>
 
-        <!-- Sectie met Apparaat Kaarten -->
+        <!-- Appliance Cards Section -->
         <div class="appliance-cards">
-            <!-- Wasmachine Kaart -->
+            <!-- Wasmachine Card -->
             <div class="card" onclick="window.location.href='pages/wasmachine.php';">
                 <img src="img/washing-machine-svgrepo-com.svg" alt="Wasmachine">
                 <h2>Wasmachine</h2>
-                <p>Stel de instellingen van je wasmachine in</p>
             </div>
 
-            <!-- Magnetron Kaart -->
+            <!-- Magnetron Card -->
             <div class="card" onclick="window.location.href='pages/magnetron.php';">
                 <img src="img/microwave-oven-svgrepo-com.svg" alt="Magnetron">
                 <h2>Magnetron</h2>
-                <p>Stel de instellingen van je magnetron in</p>
             </div>
 
-            <!-- Koffieapparaat Kaart -->
+            <!-- Koffieapparaat Card -->
             <div class="card" onclick="window.location.href='pages/koffieapparaat.php';">
                 <img src="img/coffee-machine-svgrepo-com.svg" alt="Koffieapparaat">
                 <h2>Koffieapparaat</h2>
-                <p>Stel de instellingen van je koffieapparaat in</p>
+
             </div>
 
-            <!-- Blender Kaart -->
+            <!-- Blender Card -->
             <div class="card" onclick="window.location.href='pages/blender.php';">
                 <img src="img/blender-2-svgrepo-com.svg" alt="Blender">
-                <h2>Blender</h2>
-                <p>Stel de instellingen van je blender in</p>
+                <h2>Blender</h2>    
             </div>
         </div>
     </div>

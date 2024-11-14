@@ -48,15 +48,18 @@ $wasmachine->kiesProgramma($huidigProgramma);
         <section class="device-control">
             <img src="../img/washing-machine-svgrepo-com.svg" alt="Wasmachine Icon" class="device-icon">
 
+            <!-- Centered Power Button with Icon -->
             <form method="post" class="control-form">
                 <button type="submit" name="toggle_on_off" class="toggle-button">
+                    <img src="../img/power-button-svgrepo-com.svg" alt="Power Button Icon" class="power-icon">
                     <?php echo $wasmachineStatus == 'on' ? 'Zet Uit' : 'Zet Aan'; ?>
                 </button>
             </form>
 
+            <!-- Styled Program Selector with Label -->
             <form method="post" class="control-form">
                 <div class="select-group">
-                    <label for="programma">Kies Programma:</label>
+                    <label for="programma" class="select-label">Kies Programma:</label>
                     <select name="programma" id="programma" class="select-dropdown">
                         <option value="Katoen" <?php echo $huidigProgramma == 'Katoen' ? 'selected' : ''; ?>>Katoen</option>
                         <option value="Synthetisch" <?php echo $huidigProgramma == 'Synthetisch' ? 'selected' : ''; ?>>Synthetisch</option>
@@ -67,17 +70,22 @@ $wasmachine->kiesProgramma($huidigProgramma);
                 <button type="submit" name="set_program" class="set-button">Set Programma</button>
             </form>
 
+            <!-- Centered Status Indicator -->
             <div id="status" class="status <?php echo $wasmachineStatus; ?>">
-                <p><?php echo $wasmachineStatus == 'on' ? 'Wasmachine is AAN' : 'Wasmachine is UIT'; ?></p>
+                <p><span class="status-icon"><?php echo $wasmachineStatus == 'on' ? '🟢' : '🔴'; ?></span>
+                <?php echo $wasmachineStatus == 'on' ? 'Wasmachine is AAN' : 'Wasmachine is UIT'; ?></p>
                 <strong>Huidig Programma:</strong> <?php echo $huidigProgramma; ?>
             </div>
         </section>
 
         <section class="back-button">
             <a href="../index.php">
-                <button class="back-home-button">Terug naar Home</button>
+                <button class="back-home-button"><span>🏠</span> Terug naar Home</button>
             </a>
         </section>
     </div>
 </body>
 </html>
+
+
+

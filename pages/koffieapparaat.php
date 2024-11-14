@@ -1,6 +1,4 @@
 <?php
-// koffieapparaat.php
-
 session_start(); // Start de sessie om gegevens tussen pagina's op te slaan
 
 // Controleer of de Koffieapparaat klasse bestaat, anders include het bestand
@@ -57,17 +55,21 @@ $koffieapparaat->stelGrootteIn($huidigeGrootte);
         </header>
 
         <section class="device-control">
+            <!-- Koffieapparaat Icon -->
             <img src="../img/coffee-machine-svgrepo-com.svg" alt="Koffieapparaat Icon" class="device-icon">
 
+            <!-- Toggle Button (Power On/Off) -->
             <form method="post" class="control-form">
                 <button type="submit" name="toggle_on_off" class="toggle-button">
+                    <img src="../img/power-button-svgrepo-com.svg" alt="Power Button Icon" class="power-icon">
                     <?php echo $koffieapparaatStatus == 'on' ? 'Zet Uit' : 'Zet Aan'; ?>
                 </button>
             </form>
 
+            <!-- Strength Selection -->
             <form method="post" class="control-form">
                 <div class="select-group">
-                    <label for="sterkte">Kies Koffie Sterkte:</label>
+                    <label for="sterkte" class="select-label">Kies Koffie Sterkte:</label>
                     <select name="sterkte" id="sterkte" class="select-dropdown">
                         <option value="Zwak" <?php echo $huidigeSterkte == 'Zwak' ? 'selected' : ''; ?>>Zwak</option>
                         <option value="Medium" <?php echo $huidigeSterkte == 'Medium' ? 'selected' : ''; ?>>Medium</option>
@@ -77,9 +79,10 @@ $koffieapparaat->stelGrootteIn($huidigeGrootte);
                 <button type="submit" name="set_strength" class="set-button">Set Sterkte</button>
             </form>
 
+            <!-- Size Selection -->
             <form method="post" class="control-form">
                 <div class="select-group">
-                    <label for="grootte">Kies Koffie Grootte:</label>
+                    <label for="grootte" class="select-label">Kies Koffie Grootte:</label>
                     <select name="grootte" id="grootte" class="select-dropdown">
                         <option value="Regulier" <?php echo $huidigeGrootte == 'Regulier' ? 'selected' : ''; ?>>Regulier</option>
                         <option value="Klein" <?php echo $huidigeGrootte == 'Klein' ? 'selected' : ''; ?>>Klein</option>
@@ -89,9 +92,10 @@ $koffieapparaat->stelGrootteIn($huidigeGrootte);
                 <button type="submit" name="set_size" class="set-button">Set Grootte</button>
             </form>
 
+            <!-- Current Status -->
             <div id="status" class="status <?php echo $koffieapparaatStatus; ?>">
-                <?php echo $koffieapparaatStatus == 'on' ? 'Koffieapparaat is AAN' : 'Koffieapparaat is UIT'; ?>
-                <br>
+                <p><span class="status-icon"><?php echo $koffieapparaatStatus == 'on' ? '🟢' : '🔴'; ?></span>
+                <?php echo $koffieapparaatStatus == 'on' ? 'Koffieapparaat is AAN' : 'Koffieapparaat is UIT'; ?></p>
                 <strong>Huidige Sterkte:</strong> <?php echo $huidigeSterkte; ?>
                 <br>
                 <strong>Huidige Grootte:</strong> <?php echo $huidigeGrootte; ?>
@@ -100,7 +104,7 @@ $koffieapparaat->stelGrootteIn($huidigeGrootte);
 
         <section class="back-button">
             <a href="../index.php">
-                <button class="back-home-button">Terug naar Home</button>
+                <button class="back-home-button"><span>🏠</span> Terug naar Home</button>
             </a>
         </section>
     </div>

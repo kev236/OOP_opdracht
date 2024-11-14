@@ -1,42 +1,28 @@
 <?php
-// magnetron.php
+session_start();
 
-session_start(); // Start de sessie om gegevens tussen pagina's op te slaan
-
-// Controleer of de Magnetron klasse bestaat, anders include het bestand
 require_once '../app/Magnetron.php';
 
-// Maak een instantie van de Magnetron klasse
 $magnetron = new Magnetron();
 
-// Sla de status van de magnetron en de instellingen op in de sessie als deze bestaan
+// Check for POST requests to update settings
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['toggle_on_off'])) {
-        // Zet de magnetron aan of uit
-        if (isset($_SESSION['magnetron_status']) && $_SESSION['magnetron_status'] == 'on') {
-            $_SESSION['magnetron_status'] = 'off'; // Zet uit
-        } else {
-            $_SESSION['magnetron_status'] = 'on'; // Zet aan
-        }
+        $_SESSION['magnetron_status'] = $_SESSION['magnetron_status'] === 'on' ? 'off' : 'on';
     }
-
-    // Verander het vermogen
     if (isset($_POST['set_power'])) {
         $_SESSION['magnetron_vermogen'] = $_POST['vermogen'];
     }
-
-    // Verander de tijd
     if (isset($_POST['set_time'])) {
         $_SESSION['magnetron_tijd'] = $_POST['tijd'];
     }
 }
 
-// Zorg ervoor dat de status van de magnetron en de instellingen in de sessie zijn opgeslagen
-$magnetronStatus = isset($_SESSION['magnetron_status']) ? $_SESSION['magnetron_status'] : 'off';
-$huidigVermogen = isset($_SESSION['magnetron_vermogen']) ? $_SESSION['magnetron_vermogen'] : 5;
-$huidigeTijd = isset($_SESSION['magnetron_tijd']) ? $_SESSION['magnetron_tijd'] : 30;
+// Load settings from the session
+$magnetronStatus = $_SESSION['magnetron_status'] ?? 'off';
+$huidigVermogen = $_SESSION['magnetron_vermogen'] ?? 5;
+$huidigeTijd = $_SESSION['magnetron_tijd'] ?? 30;
 
-// Maak de Magnetron klasse aan met de juiste status en instellingen
 $magnetron->setStatus($magnetronStatus);
 $magnetron->stelVermogenIn($huidigVermogen);
 $magnetron->stelTijdIn($huidigeTijd);
@@ -47,7 +33,7 @@ $magnetron->stelTijdIn($huidigeTijd);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magnetron Web App</title>
+    <title>Magnetron Besturing</title>
     <link rel="stylesheet" href="../css/appstyle.css">
 </head>
 <body>
@@ -57,39 +43,49 @@ $magnetron->stelTijdIn($huidigeTijd);
         </header>
 
         <section class="device-control">
+            <!-- Magnetron Icon -->
             <img src="../img/microwave-oven-svgrepo-com.svg" alt="Magnetron Icon" class="device-icon">
 
+            <!-- Toggle Button (Power On/Off) -->
             <form method="post" class="control-form">
                 <button type="submit" name="toggle_on_off" class="toggle-button">
-                    <?php echo $magnetronStatus == 'on' ? 'Zet Uit' : 'Zet Aan'; ?>
+                    <img src="../img/power-button-svgrepo-com.svg" alt="Power Button Icon" class="power-icon">
+                    <?php echo $magnetronStatus === 'on' ? 'Zet Uit' : 'Zet Aan'; ?>
                 </button>
             </form>
 
+            <!-- Power Selection -->
             <form method="post" class="control-form">
                 <div class="select-group">
-                    <label for="vermogen">Kies Vermogen:</label>
+                    <label for="vermogen" class="select-label">Kies Vermogen:</label>
                     <select name="vermogen" id="vermogen" class="select-dropdown">
-                        <option value="1" <?php echo $huidigVermogen == 1 ? 'selected' : ''; ?>>1</option>
-                        <option value="2" <?php echo $huidigVermogen == 2 ? 'selected' : ''; ?>>2</option>
-                        <option value="3" <?php echo $huidigVermogen == 3 ? 'selected' : ''; ?>>3</option>
-                        <option value="4" <?php echo $huidigVermogen == 4 ? 'selected' : ''; ?>>4</option>
-                        <option value="5" <?php echo $huidigVermogen == 5 ? 'selected' : ''; ?>>5</option>
+                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                            <option value="<?php echo $i; ?>" <?php echo $huidigVermogen == $i ? 'selected' : ''; ?>>
+                                <?php echo $i; ?>
+                            </option>
+                        <?php endfor; ?>
                     </select>
                 </div>
-                <button type="submit" name="set_power" class="set-button">Set Vermogen</button>
+                <button type="submit" name="set_power" class="set-button">
+                    Set Vermogen
+                </button>
             </form>
 
+            <!-- Time Selection -->
             <form method="post" class="control-form">
-                <div class="time-input">
-                    <label for="tijd">Kies Tijd (seconden):</label>
+                <div class="select-group">
+                    <label for="tijd" class="select-label">Kies Tijd (seconden):</label>
                     <input type="number" name="tijd" id="tijd" value="<?php echo $huidigeTijd; ?>" class="input-field">
                 </div>
-                <button type="submit" name="set_time" class="set-button">Set Tijd</button>
+                <button type="submit" name="set_time" class="set-button">
+                    Set Tijd
+                </button>
             </form>
 
+            <!-- Current Status -->
             <div id="status" class="status <?php echo $magnetronStatus; ?>">
-                <?php echo $magnetronStatus == 'on' ? 'Magnetron is AAN' : 'Magnetron is UIT'; ?>
-                <br>
+                <p><span class="status-icon"><?php echo $magnetronStatus === 'on' ? '🟢' : '🔴'; ?></span>
+                <?php echo $magnetronStatus === 'on' ? 'Magnetron is AAN' : 'Magnetron is UIT'; ?></p>
                 <strong>Huidig Vermogen:</strong> <?php echo $huidigVermogen; ?>
                 <br>
                 <strong>Huidige Tijd:</strong> <?php echo $huidigeTijd; ?> seconden
@@ -98,7 +94,7 @@ $magnetron->stelTijdIn($huidigeTijd);
 
         <section class="back-button">
             <a href="../index.php">
-                <button class="back-home-button">Terug naar Home</button>
+                <button class="back-home-button"><span>🏠</span> Terug naar Home</button>
             </a>
         </section>
     </div>

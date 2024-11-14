@@ -8,11 +8,13 @@
 /* Body and Container */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    color: #fff;
+    overflow: hidden;
 }
 
 .container {
@@ -20,62 +22,115 @@ body {
     padding: 20px;
     max-width: 1200px;
     width: 100%;
+    backdrop-filter: blur(12px);
+    position: relative;
 }
 
 h1 {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 30px;
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 40px;
+    font-weight: 700;
+    text-shadow: 0px 0px 20px rgba(0, 82, 204, 0.7);
+    animation: fadeInDown 1.2s ease-out;
 }
 
 /* Appliance Cards Section */
 .appliance-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
     justify-items: center;
     padding: 20px;
+    perspective: 1000px;
 }
 
-/* Card Styles */
+/* Card Styles with Enhanced Glassmorphism */
 .card {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.95);  /* Lighter white background */
+    border-radius: 20px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);  /* Slightly softer shadow */
     text-align: center;
-    padding: 30px;
+    padding: 40px;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
     width: 100%;
-    max-width: 300px;
+    max-width: 320px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px) saturate(180%);  /* Slightly softer blur effect */
+    border: 1px solid rgba(255, 255, 255, 0.2);  /* Lighter border */
+    transform-style: preserve-3d;
 }
 
 .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-15px) rotateX(6deg) rotateY(-6deg);
+    box-shadow: 0 20px 40px rgba(0, 100, 255, 0.2);  /* Softer hover shadow */
+}
+
+/* Animated Gradient Glow */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(30, 60, 114, 0.1), transparent 60%);  /* Softer gradient */
+    animation: rotateGlow 10s linear infinite;
+    z-index: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 20px;
+}
+
+.card:hover::before {
+    opacity: 1;
 }
 
 /* Image Style */
 .card img {
-    width: 60%;
-    max-width: 120px;
+    width: 70px;
     margin-bottom: 20px;
+    z-index: 1;
+    position: relative;
+    animation: fadeInUp 1s ease-out;
 }
 
 /* Title and Description */
 .card h2 {
-    font-size: 1.8rem;
-    color: #333;
+    font-size: 1.6rem;
+    color: #333;  /* Darker text for contrast */
     margin-bottom: 10px;
+    font-weight: 600;
+    z-index: 1;
+    position: relative;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);  /* Subtle text shadow */
 }
 
 .card p {
     font-size: 1rem;
-    color: #666;
+    color: #555;  /* Darker color for better readability */
+    z-index: 1;
+    position: relative;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);  /* Subtle text shadow */
 }
 
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .card {
+        padding: 30px;
+    }
+
+    .card img {
+        width: 60px;
+    }
+}
+
+@media (max-width: 480px) {
     h1 {
         font-size: 2rem;
     }
@@ -85,20 +140,38 @@ h1 {
     }
 
     .card img {
-        width: 50%;
+        width: 50px;
     }
 }
 
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.5rem;
+/* Animations */
+@keyframes rotateGlow {
+    from {
+        transform: rotate(0deg);
     }
-
-    .card {
-        padding: 15px;
+    to {
+        transform: rotate(360deg);
     }
+}
 
-    .card img {
-        width: 40%;
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

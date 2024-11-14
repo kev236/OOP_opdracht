@@ -1,4 +1,4 @@
-/* Global Reset and Box Model */
+/* Container and Basic Reset */
 *,
 *::before,
 *::after {
@@ -7,242 +7,174 @@
     padding: 0;
 }
 
-html {
-    font-size: 14px; /* Smaller base font size for a more compact feel */
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f4f6f9;
+html, body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
     color: #333;
-    line-height: 1.5;
-    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 25px; /* Reduced padding for a tighter design */
-    overflow: hidden;
+    padding: 20px;
 }
 
-/* Container: Centered and Compact */
+/* Centered Container */
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 800px; /* More compact container width */
-    padding: 30px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 500px;
     text-align: center;
-    transform: scale(0.98);
 }
 
-/* Header Styling */
+/* Header */
 header h1 {
-    font-size: 2.3rem; /* Smaller header font */
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 25px;
-    color: #2c3e50;
-    text-transform: uppercase;
-    transition: color 0.3s ease;
+    font-size: 2.5rem;
+    color: #00796b;
+    margin-bottom: 20px;
 }
 
-header h1:hover {
-    color: #009688;
-}
-
-/* Device Control Section */
-.device-control {
-    display: grid;
-    place-items: center;
-    gap: 20px; /* Smaller gap between elements */
-    width: 100%;
-}
-
-/* Device Icon */
+/* Device Icon - Centered */
 .device-icon {
-    max-width: 180px; /* Slightly smaller icon size */
-    width: 100%;
+    max-width: 160px;
+    margin: 20px 0;
     transition: transform 0.3s ease;
 }
 
 .device-icon:hover {
-    transform: scale(1.05); /* Slight zoom effect */
+    transform: scale(1.05);
 }
 
-/* Button Styles */
+/* Centering Forms and Buttons */
+.control-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 0;
+}
+
 button {
-    background-color: #009688;
-    color: #fff;
-    padding: 12px 26px; /* Slightly smaller padding */
-    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    border-radius: 12px;
+    background: #e0e5ec;
+    color: #333;
     border: none;
-    font-size: 1rem; /* Smaller font size */
+    box-shadow: 8px 8px 15px #b8c2cc, -8px -8px 15px #ffffff;
+    font-size: 1rem;
     font-weight: 600;
-    width: 200px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    display: inline-block;
+    width: 100%;
+    max-width: 240px;
+    margin-top: 10px;
     text-align: center;
 }
 
 button:hover {
-    background-color: #00796b;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
 }
 
 button:active {
-    background-color: #004d40;
-    transform: translateY(1px);
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: inset 4px 4px 8px #b8c2cc, inset -4px -4px 8px #ffffff;
 }
 
-/* Input/Select Styles */
-input[type="number"],
-select {
-    padding: 12px;
-    border-radius: 10px;
-    border: 2px solid #ddd;
-    background-color: #f9fafb;
-    font-size: 0.95rem; /* Smaller font size */
-    width: 100%;
-    max-width: 300px; /* Reduced width */
-    transition: border-color 0.3s ease, background-color 0.3s ease;
+/* Power Button Icon */
+.power-icon {
+    height: 24px;
+    width: 24px;
+    margin-right: 8px;
 }
 
-input[type="number"]:focus,
-select:focus {
-    border-color: #009688;
-    outline: none;
-    background-color: #e0f2f1;
+/* Select Group Styling */
+.select-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 0;
 }
 
-/* Status Message Box */
-.status {
-    background-color: #f9f9f9;
-    padding: 18px;
-    border-radius: 12px;
+.select-label {
+    font-size: 1.1rem;
+    color: #00796b;
     font-weight: 600;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+select, .input-field {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: #f4f6f9;
+    box-shadow: 4px 4px 8px #c8d0d8, -4px -4px 8px #ffffff;
+    transition: box-shadow 0.3s ease;
     width: 100%;
-    max-width: 380px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    max-width: 240px;
+    font-size: 1rem;
+    color: #333;
+    text-align: center;
+}
+
+select:focus, .input-time:focus {
+    outline: none;
+    box-shadow: 6px 6px 12px #c8d0d8, -6px -6px 12px #ffffff;
+}
+
+/* Status Styling */
+.status {
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(240, 240, 240, 0.9);
+    color: #333;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 15px;
+    transition: background 0.3s ease;
+    font-size: 1.2rem;
 }
 
 .status.on {
-    background-color: #e0f7fa;
+    background: #e0f7fa;
     color: #00796b;
 }
 
 .status.off {
-    background-color: #fbe9e7;
+    background: #ffebee;
     color: #d32f2f;
 }
 
-.status p {
-    margin: 8px 0;
-    font-size: 1rem;
-}
-
-/* Back Button */
+/* Centering Back Button */
 .back-home-button {
-    background-color: #bdbdbd;
-    color: #fff;
-    padding: 12px 26px; /* Smaller padding */
-    border-radius: 10px;
-    font-size: 1rem; /* Smaller font size */
-    text-align: center;
-    display: inline-block;
-    width: 200px;
+    background: #e0e5ec;
+    color: #333;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    box-shadow: 8px 8px 15px #b8c2cc, -8px -8px 15px #ffffff;
+    font-weight: 600;
+    cursor: pointer;
     margin-top: 20px;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 240px;
+    text-align: center;
 }
 
 .back-home-button:hover {
-    background-color: #757575;
-    transform: translateY(-3px);
+    transform: scale(1.02);
 }
 
 .back-home-button:active {
-    background-color: #616161;
-    transform: translateY(1px);
+    box-shadow: inset 4px 4px 8px #b8c2cc, inset -4px -4px 8px #ffffff;
 }
 
-/* Animation for Loading/Action Button */
-@keyframes loading {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+.back-home-button span {
+    margin-right: 6px;
 }
-
-button.loading {
-    position: relative;
-    pointer-events: none;
-}
-
-button.loading::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20px;
-    height: 20px;
-    border: 3px solid #fff;
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: loading 1s linear infinite;
-    transform: translate(-50%, -50%);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    body {
-        padding: 20px;
-    }
-
-    header h1 {
-        font-size: 2rem; /* Smaller header font on mobile */
-    }
-
-    .device-icon {
-        max-width: 150px; /* Smaller icon size */
-    }
-
-    .container {
-        padding: 25px;
-    }
-
-    button,
-    .back-home-button {
-        width: 100%;
-        padding: 14px;
-        font-size: 1.1rem; /* Slightly larger text on mobile for better usability */
-    }
-
-    input[type="number"],
-    select {
-        max-width: 100%;
-        padding: 12px;
-    }
-
-    .status {
-        font-size: 0.95rem;
-        padding: 15px;
-    }
-}
-
